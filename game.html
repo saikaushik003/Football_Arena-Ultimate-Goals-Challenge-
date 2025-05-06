@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goals Challenge Gallery</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="icon" href="images/russia.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS (via CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'ZCOOL KuaiLe', cursive;
+      background-color: #F1F5F9;
+      color: #1E293B;
+      line-height: 1.6;
+    }
+    .material-symbols-outlined {
+      vertical-align: middle;
+      font-variation-settings: 'FILL' 0;
+    }
+    .play-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 2px solid #000;
+      background: transparent;
+      z-index: 1;
+    }
+    .play-btn:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .play-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0ea5e9 0%, #0c4a6e 100%);
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      transition: transform 0.5s ease-out;
+    }
+    .play-btn:hover::before {
+      transform: scaleX(1);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-slate-300 min-h-screen">
+  <header class="bg-white shadow-md py-6 mb-8">
+    <div class="container mx-auto px-6">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-cyan-800 flex items-center justify-center">
+        <span class="material-symbols-outlined mr-2">sports_and_outdoors</span>
+        Ultimate Goals Challenge
+      </h1>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-20">
+    <!-- 1,000 Goals Challenge Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_1.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_GK2.png" alt="GK Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          1,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-green-600 font-bold">4</span> club &amp; <span class="text-yellow-600 font-bold">1</span> career</li>
+          <li><span class="text-orange-600">Draws:</span> 5 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">1,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="levels.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2,000 Goals Challenge Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_2.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_RB.png" alt="RB Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          2,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-green-600 font-bold">5</span> club &amp; <span class="text-yellow-600 font-bold">2</span> career</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">2,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="2000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_3.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_CB3.png" alt="CB Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          3,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-green-600 font-bold">4</span> club &amp; <span class="text-yellow-600 font-bold">2</span> career &amp <span class="text-orange-600">1</span> double</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">3,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="3000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+    <!-- Remaining cards... -->
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_4.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_LB.png" alt="LB Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          4,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-green-600 font-bold">2</span> club &amp; <span class="text-yellow-600 font-bold">2</span> career &amp <span class="text-orange-600">3</span> double</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">4,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="4000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_5.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_CM.png" alt="CM Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          5,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-green-600 font-bold">2</span> club &amp; <span class="text-yellow-600 font-bold">2</span> career &amp <span class="text-orange-600">2</span> double &amp <span class="text-sky-500">1</span> triple</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">5,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="5000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_6.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_aM.png" alt="AM Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          6,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-green-600 font-bold">1</span> club &amp; <span class="text-yellow-600 font-bold">2</span> career &amp <span class="text-orange-600">3</span> double &amp <span class="text-sky-500">1</span> triple</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">6,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="6000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_7.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_WF.png" alt="WF Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          7,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span> <span class="text-yellow-600 font-bold">2</span> career &amp <span class="text-orange-600">3</span> double &amp <span class="text-sky-500">2</span> triple</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">7,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="7000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_8.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_F.png" alt="F Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          8,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span><span class="text-yellow-600 font-bold">2</span> career &amp <span class="text-orange-600">2</span> double &amp <span class="text-sky-500">2</span> triple &amp <span class="text-pink-500">1</span> quad</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">8,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="8000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_9.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_PS.png" alt="PS Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          9,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span><span class="text-yellow-600 font-bold">1</span> career &amp <span class="text-orange-600">2</span> double &amp <span class="text-sky-500">2</span> triple &amp <span class="text-pink-500">2</span> quad</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold"> 9,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="9000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <!-- Images Section -->
+      <div class="flex flex-row">
+        <img src="https://a.espncdn.com//prod/styles/pagetype/otl/20171127_fc100/images/fc100_mock_10.png" alt="Mock Player" class="p-4 w-2/5 h-full object-cover border-r-4 border-cyan-700">
+        <div class="w-3/5 flex justify-center items-center bg-sky-500">
+          <img src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_chapterheader_M.png" alt="PS Icon" class="p-4">
+        </div>
+      </div>
+      <!-- Description Section -->
+      <div class="p-6 border-t-4 border-cyan-700">
+        <h2 class="text-2xl font-extrabold text-blue-950 mb-4 flex items-center">
+          10,000 Goals Challenge
+          <span class="material-symbols-outlined ml-2">sports_and_outdoors</span>
+        </h2>
+        <ul class="space-y-2 text-lg font-semibold text-blue-950">
+          <li><span class="text-purple-600">Slots:</span><span class="text-yellow-600 font-bold">1</span> career &amp <span class="text-orange-600">1</span> double &amp <span class="text-sky-500">3</span> triple &amp <span class="text-pink-500">1</span> quad &amp <span class="text-purple-700">1</span> quintuple(x 5)</li>
+          <li><span class="text-orange-600">Draws:</span> 7 random players</li>
+          <li><span class="text-rose-600">Task:</span> Place each drawn player in the correct slot to reach <span class="text-red-700 font-bold">10,000 goals</span></li>
+        </ul>
+        <div class="py-2 flex items-center justify-center">
+        <a href="10000.html" class="play-btn text-2xl py-2 px-12 rounded-xl font-extrabold flex items-center">PLAY<span class="material-symbols-outlined ml-2">ar_stickers</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+  </div>
+</body>
+</html>

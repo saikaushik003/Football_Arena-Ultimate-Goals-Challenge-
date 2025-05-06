@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AETQCHE FC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/russia.png" />
+  <style>
+     body{
+      font-family: "Genos", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      overflow-x: hidden;
+     }
+     
+     /* Prevent images from being dragged or opened in new tabs */
+     img {
+       pointer-events: none;
+       -webkit-user-drag: none;
+       -khtml-user-drag: none;
+       -moz-user-drag: none;
+       -o-user-drag: none;
+     }
+     
+     /* Better mobile responsiveness */
+     @media (max-width: 640px) {
+       .btn-transparent {
+         margin: 0 auto;
+       }
+     }
+     
+     @keyframes reveal {
+         from {
+             opacity: 0;
+             transform: translateY(20px);
+         }
+         to {
+             opacity: 1;
+             transform: translateY(0);
+         }
+     }
+
+     .animate-reveal {
+         animation: reveal 1s ease-out forwards;
+         opacity: 0;
+     }
+
+     .reveal-delay-1 { animation-delay: 0.5s; }
+     .reveal-delay-2 { animation-delay: 1s; }
+
+     @keyframes float {
+       0%, 100% { transform: translateY(0); }
+       50% { transform: translateY(-8px); }
+     }
+     .animate-float { animation: float 4s ease-in-out infinite; }
+     .animate-float-delay-1 { animation: float 4s ease-in-out 1s infinite; }
+     .animate-float-delay-2 { animation: float 4s ease-in-out 2s infinite; }
+     .animate-float-delay-3 { animation: float 4s ease-in-out 3s infinite; }
+
+     .btn-transparent {
+         background-color: transparent;
+         border: 2px solid rgba(255, 255, 255, 0.6);
+         color: black;
+         transition: all 0.3s ease-in-out;
+     }
+     .btn-transparent:hover {
+         background-color: rgba(255, 255, 255, 0.3);
+         border-color: white;
+     }
+  </style>
+  <body class="bg-gray-100">
+    <!-- Desktop version -->
+    <div class="desktop-version hidden md:block relative">
+      <img class="absolute top-[160px] left-[520px] w-[500px]" src="images/logo.png" alt="logo" />
+      <img class="bg-slate-300" src="https://www.espn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_background.svg" alt="desktop-bg" />
+
+      <img class="fc100-benzema animate-float absolute top-[20px] left-[0px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_benzema.svg" />
+
+      <img class="fc100-sanchez animate-float-delay-1 absolute top-[60px] left-[220px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_sanchez.svg" />
+
+      <img class="fc100-ramos animate-float-delay-2 absolute top-[216px] left-[64px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_ramos.svg" />
+
+      <img class="fc100-debruyne animate-float-delay-3 absolute top-[224px] left-[272px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_debruyne.svg" />
+
+      <img class="fc100-marcello animate-float absolute top-[20px] right-[20px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_marcello.svg" />
+
+      <img class="fc100-degea animate-float-delay-1 absolute top-[64px] right-[208px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_degea.svg" />
+
+      <img class="fc100-alves animate-float-delay-2 absolute top-[224px] right-[88px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_alves.svg" />
+
+      <img class="fc100-mendy animate-float-delay-3 absolute top-[224px] right-[272px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_mendy.svg" />
+
+      <img class="fc100-neymar animate-float absolute top-[440px] left-[56px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_neymar.svg" />
+
+      <img class="fc100-neuer animate-float-delay-1 absolute top-[420px] left-[312px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_neuer.svg" />
+
+      <img class="fc100-suarez animate-float-delay-2 absolute top-[584px] left-[232px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_suarez.svg" />
+
+      <img class="fc100-mane animate-float-delay-3 absolute top-[608px] left-[404px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_mane.svg" />
+
+      <img class="fc100-buffon animate-float absolute top-[440px] right-[24px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_buffon.svg" />
+
+      <img class="fc100-zidane animate-float-delay-1 absolute top-[432px] right-[300px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_zidane.svg" />
+
+      <img class="fc100-modric animate-float-delay-2 absolute top-[608px] right-[160px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_modric.svg" />
+
+      <img class="fc100-lewandowski animate-float-delay-3 absolute top-[608px] right-[360px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_lewandowski.svg" />
+
+      <img class="fc100-messi animate-float absolute top-[648px] left-[608px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_messi.svg" />
+
+      <img class="fc100-ronaldo animate-float absolute top-[648px] right-[544px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_ronaldo.svg" />
+
+      <img class="fc100-pep animate-float-delay-2 absolute top-[768px] left-[48px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_pep.svg" />
+
+      <img class="fc100-willian animate-float-delay-3 absolute top-[768px] right-[24px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_willian.svg" />
+
+      <img class="fc100-isco animate-float absolute top-[928px] left-[20px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_isco.svg" />
+
+      <img class="fc100-conte animate-float-delay-1 absolute top-[928px] right-[20px] w-[184px]" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/tsa_conte.svg" />
+      <!-- ... (rest of the images with same animation classes) ... -->
+    </div>
+    <div class="animate-reveal reveal-delay-1 absolute top-[400px] left-[620px] text-4xl font-extrabold text-cyan-500 md:block hidden">AETQCHE PRESENT's</div>
+    <div class="animate-reveal reveal-delay-2 absolute top-[480px] left-[696px] text-2xl font-extrabold text-black md:block hidden">FOOTBALL ARENA</div>
+    <div class="absolute top-[880px] left-[640px] md:block hidden">
+      <a href = "game.html" class="btn-transparent flex w-80 items-center justify-center gap-2 rounded-full px-4 py-2 text-2xl font-bold transition duration-300 ease-in-out hover:bg-white hover:text-red-500">
+        PLAY
+        <i class="bi bi-amd text-sm"></i>
+      </a>
+    </div>
+    
+    <!-- Mobile version -->
+    <div class="mobile-version md:hidden block">
+      <div class="bg-slate-300 min-h-screen relative overflow-x-hidden">
+        <!-- Header for mobile with responsive sizing -->
+        <div class="flex items-center justify-center w-full">
+          <img class="w-full max-w-md mx-auto" src="https://a.espncdn.com/prod/styles/pagetype/otl/20171127_fc100/images/fc100_mobileheader_players4.png" alt="" />
+        </div>
+        
+        <!-- Text and button with responsive positioning -->
+        <div class=" absolute top-[174px] w-full text-center mt-4">
+          <!-- Responsive text positioning using fixed width container instead of absolute positioning -->
+          <div class="mx-auto px-4">
+            <p class="text-xl sm:text-xl font-extrabold text-cyan-500">AETQCHE PRESENT'S</p>
+            <p class="text-lg sm:text-2xl font-extrabold mt-2">FOOTBALL ARENA</p>
+            
+            <!-- Center aligned button with responsive width -->
+            <div class="flex justify-center mt-6">
+              <a href="game.html" class="btn-transparent flex items-center justify-center gap-2 rounded-full px-4 py-2 text-xl font-bold w-64 sm:w-72 transition duration-300 ease-in-out hover:bg-white hover:text-red-500">
+                PLAY
+                <i class="bi bi-amd text-sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leagues section -->
+        <div class="mt-12 px-2">
+          <div class="flex items-center justify-center bg-cyan-100 py-2 rounded-t-md">
+            <p class="font-extrabold text-sm">THE TOP FOOTBALL LEAGUES</p>
+          </div>
+
+          <!-- Responsive grid for leagues that works on all screen widths -->
+          <div class="grid grid-cols-4 gap-2 p-3 rounded-b-md">
+            <div class="flex justify-center items-center">
+              <img class="w-12 h-12 object-contain" src="https://brandlogos.net/wp-content/uploads/2016/11/premier-league-logo-preview.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-10 h-10 object-contain" src="https://brandlogos.net/wp-content/uploads/2021/01/la-liga-logo-768x768.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-6 h-6 object-contain" src="https://brandlogos.net/wp-content/uploads/2025/02/serie_a-logo_brandlogos.net_kmz4e.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-10 h-10 object-contain" src="https://brandlogos.net/wp-content/uploads/2020/09/bundesliga-logo-768x768.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-14 h-8 object-contain" src="https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo-768x432.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-8 h-8 object-contain" src="https://brandlogos.net/wp-content/uploads/2015/09/mls-logo_brandlogos.net_uslqz.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-6 h-8 object-contain" src="https://brandlogos.net/wp-content/uploads/2023/08/saudi_pro_league-logo_brandlogos.net_wdine-768x1120.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-8 h-8 object-contain" src="https://brandlogos.net/wp-content/uploads/2023/08/russian_premier_league-logo_brandlogos.net_hm1nn-768x722.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Brands section with improved spacing -->
+        <div class="mt-6 px-2">
+          <div class="flex items-center justify-center bg-cyan-100 py-2 rounded-t-md">
+            <p class="font-extrabold text-sm">BRANDS</p>
+          </div>
+          
+          <!-- Responsive grid for brands -->
+          <div class="grid grid-cols-3 p-3 rounded-b-md">
+            <div class="flex justify-center items-center">
+              <img class="w-16 h-16 object-contain" src="https://brandlogos.net/wp-content/uploads/2022/05/ea_sports_fifa-logo-brandlogos.net_-768x768.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-12 h-12 object-contain" src="https://images.icon-icons.com/2622/PNG/512/brand_nike_icon_157863.png" alt="nike" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-12 h-12 object-contain" src="https://images.icon-icons.com/2699/PNG/512/adidas_logo_icon_169639.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-12 h-12 object-contain" src="https://images.icon-icons.com/2845/PNG/512/puma_logo_icon_181343.png" alt="puma" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-12 h-12 object-contain" src="https://www.freelogovectors.net/wp-content/uploads/2023/10/ea-sports_fc_logo-freelogovectors.net_-640x474.png" alt="" />
+            </div>
+            <div class="flex justify-center items-center">
+              <img class="w-12 h-12 object-contain" src="https://brandlogos.net/wp-content/uploads/2014/10/uefa_champions_league-logo_brandlogos.net_swjss-768x735.png" alt="" />
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer with better spacing -->
+        <div class="mt-4 mb-4">
+          <div class="flex items-center justify-center p-2">
+            <img class="w-16 rounded-lg" src="https://pbs.twimg.com/profile_images/1849434842468941824/RH12_6SI_400x400.jpg" alt="" />
+          </div>
+          <div class="mt-2">
+            <p class="flex items-center justify-center gap-2 text-sm font-bold text-black"><i class="bi bi-c-circle"></i> Copyright 2003 AETQCHE, Inc. All rights reserved.</p>
+            <p class="flex items-center justify-center text-sm font-bold text-black">Developed & Designed By SaiKaushik003</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer for desktop only -->
+    <footer class="absolute top-[1112px] left-[200px] md:block hidden">
+      <div class="flex items-center justify-center text-lg font-bold bg-cyan-100 rounded-xs">THE TOP FOOTBALL LEAGUES</div>
+      <div class="flex items-center justify-center gap-20 p-2">
+        <img class="w-20 rounded-2xl" src="https://brandlogos.net/wp-content/uploads/2016/11/premier-league-logo-preview.png" alt="" />
+        <img class="w-[72px] rounded-2xl" src="https://brandlogos.net/wp-content/uploads/2021/01/la-liga-logo-768x768.png" alt="" />
+        <img class="w-10" src="https://brandlogos.net/wp-content/uploads/2025/02/serie_a-logo_brandlogos.net_kmz4e.png" alt="" />
+        <img class="w-16 rounded-2xl" src="https://brandlogos.net/wp-content/uploads/2020/09/bundesliga-logo-768x768.png" alt="" />
+        <img class="w-24 rounded-2xl" src="https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo-768x432.png" alt="" />
+        <img class="w-14 rounded-2xl" src="https://brandlogos.net/wp-content/uploads/2015/09/mls-logo_brandlogos.net_uslqz.png" alt="" />
+        <img class="w-10" src="https://brandlogos.net/wp-content/uploads/2023/08/saudi_pro_league-logo_brandlogos.net_wdine-768x1120.png" alt="" />
+        <img class="w-14" src="https://brandlogos.net/wp-content/uploads/2023/08/russian_premier_league-logo_brandlogos.net_hm1nn-768x722.png" alt="" />
+      </div>
+      <div class="flex items-center justify-center text-lg font-bold bg-cyan-100 rounded-xs">BRANDS</div>
+      <div class="flex items-center justify-center gap-20 p-2">
+        <img class="w-20 rounded-2xl" src="https://brandlogos.net/wp-content/uploads/2022/05/ea_sports_fifa-logo-brandlogos.net_-768x768.png" alt="" />
+        <img class="w-[72px] rounded-2xl" src="https://images.icon-icons.com/2622/PNG/512/brand_nike_icon_157863.png" alt="nike" />
+        <img class="w-[72px] rounded-2xl" src="https://images.icon-icons.com/2699/PNG/512/adidas_logo_icon_169639.png" alt="" />
+        <img class="w-[72px] rounded-2xl" src="https://images.icon-icons.com/2845/PNG/512/puma_logo_icon_181343.png" alt="puma" />
+        <img class="w-[72px] rounded-2xl" src="https://www.freelogovectors.net/wp-content/uploads/2023/10/ea-sports_fc_logo-freelogovectors.net_-640x474.png" alt="" />
+        <img class="w-[72px] rounded-2xl" src="https://brandlogos.net/wp-content/uploads/2014/10/uefa_champions_league-logo_brandlogos.net_swjss-768x735.png" alt="" />
+      </div>
+      <div></div>
+      <div class="flex items-center justify-center p-2">
+        <img class="w-20 rounded-lg" src="https://pbs.twimg.com/profile_images/1849434842468941824/RH12_6SI_400x400.jpg" alt="" />
+      </div>
+      <div class="">
+        <p class="flex items-center justify-center gap-2 font-bold text-black"><i class="bi bi-c-circle"></i> Copyright 2003 AETQCHE, Inc. All rights reserved.</p>
+        <p class="flex items-center justify-center font-bold text-black">Developed & Designed By SaiKaushik003</p>
+      </div>
+    </footer>
+    
+    <!-- Script to prevent right-click on images -->
+    <script>
+      document.addEventListener('contextmenu', function(event) {
+        if (event.target.tagName === 'IMG') {
+          event.preventDefault();
+          return false;
+        }
+      });
+    </script>
+  </body>
+</html>

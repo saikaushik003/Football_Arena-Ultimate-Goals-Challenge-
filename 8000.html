@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>8000 Goals Challenge</title>
+
+  <!-- Fonts -->
+  <link rel="icon" href="images/russia.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=queue_musicgraphic_eqreplayclose"
+  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      font-family: 'ZCOOL KuaiLe', cursive;
+      background-color: #F1F5F9;
+      line-height: 1.6;
+    }
+    /* Wave animation */
+    @keyframes wave {
+      0%   { transform: scaleY(1); }
+      20%  { transform: scaleY(1.2); }
+      40%  { transform: scaleY(0.8); }
+      60%  { transform: scaleY(1.4); }
+      80%  { transform: scaleY(0.9); }
+      100% { transform: scaleY(1); }
+    }
+    .wave {
+      display: inline-block;
+      transform-origin: center bottom;
+      animation: wave 0.8s ease-in-out infinite;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .slot-row {
+      border: 2px solid #000;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      cursor: pointer;
+    }
+    .slot-row.filled {
+      background: #E2E8F0;
+      cursor: default;
+    }
+    .slot-label {
+      display: flex;
+      flex-direction: column;
+    }
+    .slot-label p {
+      border-right: 4px solid #000;
+      width: 5rem;
+      text-align: center;
+      margin: 0;
+    }
+    .slot-label .club { color: #DC2626; font-size: 0.75rem; }
+    .slot-label .career { color: #CA8A04; font-size: 0.75rem; }
+    .border-r-4 {
+      border-right-width: 4px;
+    }
+    /* Modal animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+    .scale-in {
+      animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    /* Trophy animation */
+    @keyframes shine {
+      0% { transform: rotate(-20deg) scale(1); }
+      50% { transform: rotate(20deg) scale(1.2); }
+      100% { transform: rotate(-20deg) scale(1); }
+    }
+    .trophy-icon {
+      display: inline-block;
+      animation: shine 2s infinite;
+      transform-origin: center;
+      color: gold;
+      font-size: 3rem;
+    }
+    /* Sad face animation */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    .sad-icon {
+      display: inline-block;
+      animation: shake 2s infinite;
+      transform-origin: center;
+      color: #6B7280;
+      font-size: 3rem;
+    }
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-slate-300 min-h-screen font-extrabold">
+
+    <!-- header + music -->
+    <header class="relative">
+      <div class="p-2 flex items-center justify-center text-xs lg:text-xl text-blue-950">
+        8000 GOALS CHALLENGE
+      </div>
+      <!-- Music Button -->
+      <button
+        id="settingsBtn"
+        class="absolute top-2 right-4 border-2 border-black p-1 rounded-lg flex items-center justify-center"
+      >
+        <span class="material-symbols-outlined">queue_music</span>
+      </button>
+      <!-- Replay Button (positioned below music button) -->
+      <button 
+        id="playAgainBtn" 
+        class="absolute top-14 right-4 border-2 border-black p-1 rounded-lg flex items-center justify-center"
+      >
+      <span class="material-symbols-outlined">replay</span>
+      </button>
+
+
+      <!-- Music Dropdown -->
+      <div id="dropdown" class="absolute right-0 mt-2 w-48 bg-slate-200 shadow-lg rounded-lg hidden z-10 text-xs lg:text-sm">
+        <ul class="py-2">
+          <li data-src="music/John Newman - Love Me Again.mp3"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Love Me Again</li>
+          <li data-src="music/Heat Waves - Glass Animals.mp3"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Heat Waves</li>
+          <li data-src="music/The Nights.mp3"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer">The Nights</li>
+          <li data-src="music/Way Down We Go.mp3"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Way Down We Go</li>
+          <li data-src="music/C-Est-La-Vie.mp3"
+              class="px-4 py-2 hover:bg-gray-100 cursor-pointer">C-Est-La-Vie</li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- current player + their stats -->
+    <div class="p-2 space-y-2">
+      <div class="flex items-center justify-center">
+        <img id="player-img"
+             class="w-[120px] h-[176px] object-cover"
+             src=""
+             alt="Player Card" />
+      </div>
+      <div class="flex items-center justify-center text-blue-950">
+        <span id="player-name"></span>
+      </div>
+      <div class="flex items-center justify-center gap-10 text-xs lg:text-sm">
+        <p class="text-blue-950">
+          <span class="text-yellow-600">CAREER GOALS:</span>
+          <span id="current-career">—</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- slots -->
+    <div class="px-12 py-2 space-y-2 text-xs">
+
+      <!-- 2 career slot -->
+      <div class="slot-row" data-type="career" data-index="0">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-yellow-600">CAREER</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+
+      <div class="slot-row" data-type="career" data-index="1">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-yellow-600">CAREER</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+
+    <!-- 2 double slot -->
+      <div class="slot-row" data-type="double" data-index="0">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-orange-600">x 2</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+    
+      <div class="slot-row" data-type="double" data-index="1">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-orange-600">x 2</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+      
+      <div class="slot-row" data-type="triple" data-index="0">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-emerald-700">x 3</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+      
+      <div class="slot-row" data-type="triple" data-index="1">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-emerald-700">x 3</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+      
+      <div class="slot-row" data-type="quad" data-index="0">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-violet-600">x 4</p>
+        <p class="player-name flex items-center justify-center">—</p>
+        <p class="player-value w-14 flex items-center justify-center">—</p>
+      </div>
+
+    </div>
+    
+    
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 fade-in">
+      <!-- Modal Content -->
+      <div class="bg-white p-6 rounded-lg shadow-lg relative max-w-sm text-center scale-in">
+        <!-- Close Button -->
+        <button id="closeModalBtn" class="absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        
+        <!-- Success Content -->
+        <div id="successContent" class="hidden">
+          <div class="trophy-container mb-4">
+            <i class="bi bi-trophy-fill trophy-icon"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-green-600 mb-2">CONGRATULATIONS!</h2>
+          <p class="text-lg mb-4">You scored <span id="successScore" class="font-bold text-green-600">0</span> goals!</p>
+          <p class="text-sm text-gray-600 mb-6">You've reached the 8000 goal challenge!</p>
+        </div>
+        
+        <!-- Failure Content -->
+        <div id="failureContent" class="hidden">
+          <div class="sad-container mb-4">
+            <i class="bi bi-emoji-frown-fill sad-icon"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-red-600 mb-2">SO CLOSE!</h2>
+          <p class="text-lg mb-4">You scored only <span id="failureScore" class="font-bold text-red-600">0</span> goals</p>
+          <p class="text-sm text-gray-600 mb-6">Try again to reach the 8000 goal challenge!</p>
+        </div>
+        
+        <!-- Restart button -->
+        <button id="restartBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg w-full transition-colors">
+          PLAY AGAIN
+        </button>
+      </div>
+    </div>
+
+    <!-- final result (hidden, we'll use the modal instead) -->
+    <div id="result" class="hidden"></div>
+  </div>
+
+  <script>
+    // ===== music dropdown =====
+    const settingsBtn = document.getElementById('settingsBtn');
+    const dropdown    = document.getElementById('dropdown');
+    const trackItems  = Array.from(document.querySelectorAll('#dropdown li'));
+    let currentAudio  = null;
+    let currentIndex  = -1;
+    let autoPlay      = true;   // Control auto-play functionality
+
+    settingsBtn.addEventListener('click', () => {
+      dropdown.classList.toggle('hidden');
+    });
+
+    // Centralized play logic
+    function playTrackAt(index) {
+      // Make sure index is valid
+      if (index < 0 || index >= trackItems.length) {
+        console.error("Invalid track index:", index);
+        index = 0; // Default to first track if invalid
+      }
+      
+      const li  = trackItems[index];
+      const src = li.dataset.src;
+  
+      // Stop previous track
+      if (currentAudio) {
+        currentAudio.pause();
+        // Remove previous event listeners to prevent memory leaks
+        currentAudio.onended = null;
+        currentAudio.onerror = null;
+        currentAudio = null;
+      }
+  
+      // Clear any existing wave icons
+      document.querySelectorAll('#dropdown li .wave').forEach(ic => ic.remove());
+  
+      // Create & play new audio
+      currentAudio = new Audio(src);
+      currentAudio.volume = 0.4;
+      currentIndex = index;
+  
+      // When it ends, either advance to next track or loop current track
+      currentAudio.onended = () => {
+        if (autoPlay) {
+          // If autoplay is on, go to next track
+          const nextIndex = (currentIndex + 1) % trackItems.length;
+          console.log(`Track ended, playing next track at index ${nextIndex}`);
+          playTrackAt(nextIndex);
+        } else {
+          // If autoplay is off, loop the current track
+          console.log(`Track ended, looping current track at index ${currentIndex}`);
+          currentAudio.currentTime = 0;
+          currentAudio.play().catch(err => {
+            console.error("Error looping playback:", err);
+          });
+        }
+      };
+      
+      // Handle errors
+      currentAudio.onerror = (e) => {
+        console.error("Error playing audio:", e);
+        // Try the next track if this one fails
+        if (autoPlay) {
+          const nextIndex = (currentIndex + 1) % trackItems.length;
+          setTimeout(() => playTrackAt(nextIndex), 1000);
+        }
+      };
+  
+      // Play the track
+      currentAudio.play().catch(err => {
+        console.error("Error starting playback:", err);
+      });
+  
+      // Show wave icon on the active li
+      const icon = document.createElement('span');
+      icon.className   = 'material-symbols-outlined wave';
+      icon.textContent = 'equalizer';
+      li.appendChild(icon);
+      
+      console.log(`Now playing: ${li.textContent.trim()} (${index + 1}/${trackItems.length})`);
+    }
+  
+    // Wire up clicking in the menu
+    trackItems.forEach((item, idx) => {
+      item.addEventListener('click', e => {
+        // If same track is already playing, do nothing
+        if (currentAudio && currentAudio.src.includes(item.dataset.src)) return;
+        playTrackAt(idx);
+        dropdown.classList.add('hidden'); // Hide dropdown after selection
+      });
+    });
+  
+    // Close dropdown when clicking outside
+    document.addEventListener('click', e => {
+      if (!settingsBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+    
+    // Add button to toggle autoplay (optional)
+    const toggleButton = document.createElement('li');
+    toggleButton.className = 'px-4 py-2 bg-slate-100 hover:bg-gray-200 cursor-pointer border-t border-gray-300 mt-2';
+    toggleButton.textContent = 'AutoPlay: ON';
+    toggleButton.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent closing dropdown
+      autoPlay = !autoPlay;
+      toggleButton.textContent = autoPlay ? 'AutoPlay: ON' : 'AutoPlay: OFF';
+    });
+    dropdown.querySelector('ul').appendChild(toggleButton);
+
+    // ===== Game Over Modal =====
+    const gameOverModal = document.getElementById('gameOverModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const successContent = document.getElementById('successContent');
+    const failureContent = document.getElementById('failureContent');
+    const successScore = document.getElementById('successScore');
+    const failureScore = document.getElementById('failureScore');
+
+    // Show Game Over Modal
+    function showGameOverModal(score) {
+      const success = score >= 8000;
+      
+      // Reset both displays
+      successContent.classList.add('hidden');
+      failureContent.classList.add('hidden');
+      
+      // Update the appropriate display
+      if (success) {
+        successScore.textContent = score;
+        successContent.classList.remove('hidden');
+        createConfetti();
+      } else {
+        failureScore.textContent = score;
+        failureContent.classList.remove('hidden');
+      }
+      
+      // Show the modal
+      gameOverModal.classList.remove('hidden');
+    }
+
+    // Close Modal
+    function closeModal() {
+      gameOverModal.classList.add('hidden');
+    }
+
+    // Event Listeners for Modal
+    closeModalBtn.addEventListener('click', closeModal);
+    restartBtn.addEventListener('click', () => {
+      closeModal();
+      resetGame();
+    });
+
+    // Create confetti effect
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+      const confettiCount = 100;
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.top = -10 + 'px';
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = Math.random() * 10 + 5 + 'px';
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.opacity = '1';
+        confetti.style.position = 'fixed';
+        confetti.style.zIndex = '1000';
+        document.body.appendChild(confetti);
+        
+        // Animate confetti falling
+        const duration = Math.random() * 3 + 2;
+        const rotation = Math.random() * 360;
+        
+        confetti.animate(
+          [
+            { transform: `translateY(0) rotate(${rotation}deg)`, opacity: 1 },
+            { transform: `translateY(100vh) rotate(${rotation + 360}deg)`, opacity: 0 }
+          ],
+          {
+            duration: duration * 1000,
+            easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+          }
+        );
+        
+        // Remove confetti after animation
+        setTimeout(() => {
+          confetti.remove();
+        }, duration * 1000);
+      }
+    }
+
+    // ===== 4000 Goals logic =====
+    const players = [
+  {
+    "name": "Neymar Jr",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-167963031.aad31a870c81fdfea65d30fce5cb4e4f477bd95e9afed894c629187352b8404d.webp",
+    "club goals": 363,
+    "international goals": 79
+  },
+  {
+    "name": "Eden Hazard",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-84069357.b4671a28afca3677771cee0b03ea88c0af7cf1acde4afe78e3c555f429318eff.webp",
+    "club goals": 168,
+    "international goals": 33
+  },
+  {
+    "name": "Cristiano Ronaldo",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-167792961.8c27429cc1e1335789298fe224741b8e0bb3b0d44a1e731d06960b8c537f52b7.webp",
+    "club goals": 793,
+    "international goals": 154
+  },
+  {
+    "name": "Lionel Messi",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67266887.d54b8ff6a015b954b2cdd2473d4b0d300cdd6d1462ee88ebb8649e6fe996794f.webp",
+    "club goals": 754,
+    "international goals": 128
+  },
+  {
+    "name": "Ángel Di María",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67292762.c989f05b51f35eddd14e25fa6ce083d85f4cfcec0676eebac69f4b78b162d941.webp",
+    "club goals": 193,
+    "international goals": 31
+  },
+  {
+    "name": "Pelé",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50568715.e7085e24b7c32eb0fcc9269987a94dd37376e45533c6474c0e83c1157cc11cd7.webp",
+    "club goals": 709,
+    "international goals": 77
+  },
+  {
+    "name": "Diego Maradona",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-184739418.790fbda75cbd3bc9a017857391322cb950e38b3420110a83f28c28b23abeda38.webp",
+    "club goals": 311,
+    "international goals": 42
+  },
+  {
+    "name": "Ronaldo Nazário",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67146440.5fa1ac39bdc35396cd47f548f423551bc70f1909defd64d94cc785a9337f987d.webp",
+    "club goals": 352,
+    "international goals": 62
+  },
+  {
+    "name": "Ronaldinho",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67136994.9a0accb34f825fa6a6f590f7630929c8a33ed04f150af9e26bce69f66d8f489c.webp",
+    "club goals": 266,
+    "international goals": 62
+  },
+  {
+    "name": "Didier Drogba",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100694728.1b9b144833fa11315af37ac3eb281a0eb061b6b4fa514bdd8c050e6de8041c85.webp",
+    "club goals": 303,
+    "international goals": 65
+  },
+  {
+    "name": "Ferenc Puskás",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84140722.b4c86a0dc120c924a579b081aaaff02eb800f7700876d0b8fc65804c2b31daa5.webp",
+    "club goals": 624,
+    "international goals": 86
+  },
+  {
+    "name": "Zinedine Zidane",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-83887477.a646b6c7c455327d6fd90d2927bac94b3d43170dee1f07645db8a80d7da27d30.webp",
+    "club goals": 125,
+    "international goals": 31
+  },
+  {
+    "name": "Paolo Maldini",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84124519.0fbb26f615297ba154ef64eab562cd6fdbb91913592a11610720dd329737e76a.webp",
+    "club goals": 33,
+    "international goals": 7
+  },
+  {
+    "name": "Franco Baresi",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50498554.0de0cd099f4c1888c6ffa23355a9b8ddf402ed4e79e7b45a1dc8807a6c5db510.webp",
+    "club goals": 33,
+    "international goals": 1
+  },
+  {
+    "name": "Gareth Bale",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50403205.4fd60bddd00ca3bd6d1cd15939e434836dec598c9d168435d4fa84ab07387ff1.webp",
+    "club goals": 185,
+    "international goals": 41
+  },
+  {
+    "name": "Eusébio",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67351383.08d97f2f55cc43e7f04e3e9b3412aafc58605225a0b52ad3a997eac604bdb42e.webp",
+    "club goals": 582,
+    "international goals": 41
+  },
+  {
+    "name": "Johan Cruyff",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84076125.ec569dc33d499e63938f6050713f5d1166c7b2658dce3f35de6c4a177e00642c.webp",
+    "club goals": 400,
+    "international goals": 33
+  },
+  {
+    "name": "Franz Beckenbauer",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-67277337.4508778c9082257eb69f7db7059b6df0cc2466a7d506623862ca93050c15721a.webp",
+    "club goals": 98,
+    "international goals": 14
+  },
+  {
+    "name": "Mohamed Salah",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-235090355.74fd60fbcdde4e7f51060ab12714cea468e7dad2e624af92aa522a0ccfbeb4e5.webp",
+    "club goals": 320,
+    "international goals": 60
+  },
+  {
+    "name": "David Beckham",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-67109114.21ad5861fb5f7af155124a066a4d199f39c021630627ee0967ec1b56a321145c.webp",
+    "club goals": 129,
+    "international goals": 17
+  },
+  {
+    "name": "Luis Suárez",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-84062660.dbcca3feb6264a81b0694a9e9363ba425d12d3d574c8b4711747bd2ea899c1dd.webp",
+    "club goals": 518,
+    "international goals": 69
+  },
+  {
+    "name": "Zlatan Ibrahimović",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/50372884.webp",
+    "club goals": 511,
+    "international goals": 62
+  },
+  {
+    "name": "Sergio Ramos",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100819158.2e17644d1068f55652b4563da7ae83608fc395bc9f9b3452b74bad2dd5a362c2.webp",
+    "club goals": 122,
+    "international goals": 23
+  },
+  {
+    "name": "Heung Min Son",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-201526696.fdac410b2b4206c74609a63567df12df065a2a9d1f3a4092408900e2ca5f9a36.webp",
+    "club goals": 223,
+    "international goals": 51
+  },
+  {
+    "name": "Paul Pogba",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/67304728.webp",
+    "club goals": 73,
+    "international goals": 11
+  },
+  {
+    "name": "Andrés Iniesta",
+    "img": "https://game-assets.fut.gg/2022/cards/50331689.webp",
+    "club goals": 93,
+    "international goals": 13
+  },
+  {
+    "name": "Xavi Hernández",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67119399.752fe8914f4807694117f5ad61abfd40432340ea32cadf77f57093d82322d952.webp",
+    "club goals": 113,
+    "international goals": 13
+  },
+  {
+    "name": "Sergio Busquets",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50521159.4a174527951722019a777803b00d6c3a296b14d1a6969a106f8e7559b171a1de.webp",
+    "club goals": 21,
+    "international goals": 2
+  },
+  {
+    "name": "Luka Modric",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-167949163.deaa3e4a77a544b51eb38a1b80466f975ee7bdba40e9d2c3673c8319d7156a3a.webp",
+    "club goals": 104,
+    "international goals": 27
+  },
+  {
+    "name": "Mesut Özil",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/100839931.webp",
+    "club goals": 98,
+    "international goals": 23
+  },
+  {
+    "name": "Robert Lewandowski",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67297409.e8a92bd39a445c4b4de53ddf80ff247dc8550452ced2357000133024b57a9cf7.webp",
+    "club goals": 639,
+    "international goals": 85
+  },
+  {
+    "name": "Karim Benzema",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-117605665.56831145fd650e84d1f95901ca041837b3f15a1a0b2b8620d5a7cd8814b56c90.webp",
+    "club goals": 469,
+    "international goals": 37
+  },
+  {
+    "name": "Kylian Mbappé",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-117672259.f110cbe2a03480a4dfd3ae50e94395ca546bed03eb72bcad3b68db4e977e4c27.webp",
+    "club goals": 320,
+    "international goals": 48
+  },
+  {
+    "name": "Antoine Griezmann",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-100858061.01f3704523beac5ddec8f1c3fb0f62b4b57fbf77457f0de0c1cc38197733db46.webp",
+    "club goals": 284,
+    "international goals": 44
+  },
+  {
+    "name": "Vinícius Júnior",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-151233738.62cb7e27c8f75e2925473e2888bcd2881d3d43f8bca1c062113e011cfaf77f97.webp",
+    "club goals": 121,
+    "international goals": 6
+  },
+  {
+    "name": "Kevin De Bruyne",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100856281.7a8d83efc9643c1c662d0ea9201adc61c808c80b973a8e5c5f98f02604843c0f.webp",
+    "club goals": 153,
+    "international goals": 30
+  },
+  {
+    "name": "Rodri",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-84117946.a0b5d72f5e72acc5cab5a6ba6a0fd64bdbfc66413a5fa5be5bd9c703876e728d.webp",
+    "club goals": 33,
+    "international goals": 4
+  },
+  {
+    "name": "Jude Bellingham",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-134470099.51dcc6c3aaa491847794a9faf8875302fe086de42c1dd90347c53876cfde3d31.webp",
+    "club goals": 63,
+    "international goals": 6
+  },
+  {
+    "name": "Erling Haaland",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-184788461.30249800b7d733a8be42b78bde79f686effe44b981d5131dbfdb942ea927fd62.webp",
+    "club goals": 275,
+    "international goals": 40
+  },
+  {
+    "name": "Lamine Yamal",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-117718155.7d54812bddd0d7efd87fd6b61b0bdd5744880fd15763c456f5c7a90d0cb65ce7.webp",
+    "club goals": 20,
+    "international goals": 4
+  },
+  {
+    "name": "Virgil van Dijk",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-84089456.256ac0fa22e4e0f0436580c50b75c4bbe936483ff088c36024ea1a3381427311.webp",
+    "club goals": 55,
+    "international goals": 9
+  },
+  {
+    "name": "Kaká",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67247313.4653c1efec6423b33b15f0869eb11fcc622cb5feba418468b4ceb0bcb05e1a42.webp",
+    "club goals": 208,
+    "international goals": 29
+  },
+  {
+    "name": "Roberto Carlos",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67347294.503944a885626857506f9d941037a36affeb51c71135b7d9cce47eaf48c55bff.webp",
+    "club goals": 117,
+    "international goals": 10
+  },
+  {
+    "name": "Jamie Vardy",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50540478.358331fa3942ecea78ea44e28d393d61da882830420180a8700e8676728a8845.webp",
+    "club goals": 316,
+    "international goals": 7
+  },
+  {
+    "name": "Ruud Gullit",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100877396.2db3d85da396950527be08820e5beec66c16d0dd009d5c60e59991c2296980f9.webp",
+    "club goals": 219,
+    "international goals": 17
+  },
+  {
+    "name": "Rivaldo",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-83890311.a02611affb3da1dd483a23fa244b857f3bae36433566b62074b9a49106722e95.webp",
+    "club goals": 377,
+    "international goals": 35
+  },
+  {
+    "name": "Samuel Eto'o",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50341324.b03c03e886dd8876d2f7f0e31ac04409bd89182eb95ad48c58916fcccc827720.webp",
+    "club goals": 371,
+    "international goals": 56
+  },
+  {
+    "name": "Garrincha",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67356417.918fcceb2c319ee052d7b08ef39523de585c9a751a7fd48253abfc9e45b0e4d5.webp",
+    "club goals": 102,
+    "international goals": 12
+  },
+  {
+    "name": "Raúl",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-83931741.36cd935d633864e9f6a3fa1d4c8fed5e754d9340c13c8637eeedd7be237116c3.webp",
+    "club goals": 404,
+    "international goals": 44
+  },
+  {
+    "name": "Casemiro",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50531793.a70bb3a53c908afc2ab5bce64c7cdb105b96b82e819f42bced51d7f7c6a7fc4a.webp",
+    "club goals": 62,
+    "international goals": 7
+  },
+  {
+    "name": "Gonzalo Higuain",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/50499312.webp",
+    "club goals": 335,
+    "international goals": 31
+  },
+  {
+    "name": "Sergio Agüero",
+    "img": "https://game-assets.fut.gg/2022/cards/153079.webp",
+    "club goals": 385,
+    "international goals": 41
+  },
+  {
+    "name": "Alessandro Nesta",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67109952.3be8689a871d075914678fff83ca690c94fa42523467909a2027f09ad40eb024.webp",
+    "club goals": 13,
+    "international goals": 0
+  },
+  {
+    "name": "Kenny Dalglish",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67356563.650bf542becbec8f3c6d76f3242d93ed0b8b28d0a061a7137bea2e7e9d27b7ad.webp",
+    "club goals": 345,
+    "international goals": 30
+  },
+  {
+    "name": "George Best",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67335628.59d21082e5d5507f06c96cd2ea1b43e1eb43066cf02d429ca404f1af78f212f4.webp",
+    "club goals": 251,
+    "international goals": 9
+  },
+  {
+    "name": "Rio Ferdinand",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67116153.1063d60f311063613b5c426ad14d2e2e8b4d75698580cc391b85b2ccc3f34984.webp",
+    "club goals": 13,
+    "international goals": 3
+  },
+  {
+    "name": "Andrea Pirlo",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67116627.79cc6e0bd6c615021e64c5d6fae8c4f5af5c3b9350bd10c0706d13323c6bc959.webp",
+    "club goals": 73,
+    "international goals": 13
+  },
+  {
+    "name": "Marco van Basten",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50523829.54a3e9518720b298afa389a0d3b51b3d6949fed250150f2618c54b4252c3ce12.webp",
+    "club goals": 283,
+    "international goals": 24
+  },
+  {
+    "name": "Andriy Shevchenko",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50344776.1c6fdfe6f33c7bf9599f1c5ff301b73809116b8007f8480ff8a1428e55f314a6.webp",
+    "club goals": 343,
+    "international goals": 48
+  },
+  {
+    "name": "Carles Puyol",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50570032.ff5e1f6bd9fb0c7a0482cbe19d7f84534b6db3169f8f4e79734312262cdf8002.webp",
+    "club goals": 24,
+    "international goals": 3
+  },
+  {
+    "name": "Luís Figo",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67114453.03c031eba26fa842577f2c5aaf83208a2d2445b242d82e102951f7d8b131de9f.webp",
+    "club goals": 137,
+    "international goals": 32
+  },
+  {
+    "name": "Wayne Rooney",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-83940130.f919e770c2cb849f0b46aeb3dc110cd9bac4268272eb55ec93d3b081cac276fd.webp",
+    "club goals": 313,
+    "international goals": 53
+  },
+  {
+    "name": "Paul Scholes",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50331894.cf87d7768a74a3d3fcc651c718e61ea392913aa7f2609ac587cca13e04d153a9.webp",
+    "club goals": 155,
+    "international goals": 14
+  },
+  {
+    "name": "Frank Lampard",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50337119.1f3260a63b57d6ef75096ccc437220eca34333b11837c0070934ef64a2cf6450.webp",
+    "club goals": 274,
+    "international goals": 29
+  },
+  {
+    "name": "Steven Gerrard",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50345391.6386cc5e457a45b69a57a560a3148493ac27d3bca436811df81e06dbfe1f0548.webp",
+    "club goals": 190,
+    "international goals": 21
+  },
+  {
+    "name": "Alan Shearer",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67108915.5cbc45f585af9967da9e05f05c299e3a1f4fcff688d0c39bf048e47de159b60e.webp",
+    "club goals": 379,
+    "international goals": 30
+  },
+  {
+    "name": "Thierry Henry",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100664921.6a57d0b325f6c3a7f69f07110c5d6cd1d1cac32102469ae19582eedc2bef4f5a.webp",
+    "club goals": 366,
+    "international goals": 51
+  },
+  {
+    "name": "Cafu",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-83891083.f85c10e80c035d39d4809cd16be0910847935b9f59aa83c0abba133cbf1433dd.webp",
+    "club goals": 54,
+    "international goals": 5
+  },
+  {
+    "name": "Zico",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84052771.4891e9229cdfbf996be243460e5c2e5b345a9b8bd133b8b381a06369e19188a8.webp",
+    "club goals": 469,
+    "international goals": 48
+  },
+  {
+    "name": "Ashley Cole",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100697375.a17efe0a3ddbbec0d5b46cc09ac45f8d7ecb54795aa51c22df8480f1f01a6244.webp",
+    "club goals": 21,
+    "international goals": 0
+  },
+  {
+    "name": "Nemanja Vidić",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-100803897.dd525bc9d82c6532bb6be7a97359b6fbbb932e4d58c19aa472d7c386c36b5b08.webp",
+    "club goals": 48,
+    "international goals": 2
+  },
+  {
+    "name": "Philipp Lahm",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67230803.9e650a548ca1f07ec0e36d2dbd9496662b6eaa5db69a9a9ff05c465faa8ceff8.webp",
+    "club goals": 22,
+    "international goals": 5
+  },
+  {
+    "name": "Ronald Koeman",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67276544.40e3f9de940f513c7406326dcf14c4baf4b043a38fc48154797c6205f617bda3.webp",
+    "club goals": 238,
+    "international goals": 14
+  },
+  {
+    "name": "Thiago Silva",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67273104.60d2725b0fdcbc142b87a9e55607ead33e65030926a820b7fcd770494442260d.webp",
+    "club goals": 53,
+    "international goals": 7
+  },
+  {
+    "name": "Dani Alves",
+    "img": "https://game-assets.fut.gg/2022/cards/50478178.webp",
+    "club goals": 67,
+    "international goals": 8
+  },
+  {
+    "name": "Rúben Dias",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50571466.cffccb586fa2c0e070461c83db640b22306fad935bccc009f79d747ac5ad0ef1.webp",
+    "club goals": 16,
+    "international goals": 3
+  },
+  {
+    "name": "Thomas Müller",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50521244.b1a23e8684de22a42bf82bfb85ee76a003d6648edeedd8fb4db9a043def4ddd2.webp",
+    "club goals": 263,
+    "international goals": 45
+  },
+  {
+    "name": "Marco Reus",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-151183294.45338241eef02eff22db2459811772a2dce4fe236d6e1bd2253026e928b39de4.webp",
+    "club goals": 220,
+    "international goals": 15
+  },
+  {
+    "name": "Harry Kane",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67310990.f1cffc74b18f594f8adebefae872cc55e919603b82658112219d49c8a7ae5271.webp",
+    "club goals": 373,
+    "international goals": 71
+  },
+  {
+    "name": "Toni Kroos",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50514169.109d690bb3c4ceb839eb058d025105a8bfdb86dafa6ffc5841650868dc48bb61.webp",
+    "club goals": 67,
+    "international goals": 17
+  },
+  {
+    "name": "Jordi Alba",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50520980.afb4f57b9640482aef15eb4e651cd42d25b077d3514c31ef6d6554bb8d4383de.webp",
+    "club goals": 47,
+    "international goals": 9
+  },
+  {
+    "name": "Raphaël Varane",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50533183.585f16044b50223882998effcb00e45712b1eb7477959847a859d5c9e05ebd49.webp",
+    "club goals": 21,
+    "international goals": 5
+  },
+  {
+    "name": "Edinson Cavani",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50511461.426030a3763fe7fb64c87a8fa21f56add060610d1c18686cf37547345f8951c1.webp",
+    "club goals": 404,
+    "international goals": 58
+  },
+  {
+    "name": "N'Golo Kanté",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-184765290.c1abc927244dbe384888417463981fc3267b8dc30ac54b19fb18c1dc0cd469a6.webp",
+    "club goals": 31,
+    "international goals": 2
+  },
+  {
+    "name": "Joshua Kimmich",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50544270.64a384770a0e10a6db40f18665bc771692f569696289daa12650614fbd6be662.webp",
+    "club goals": 46,
+    "international goals": 8
+  },
+  {
+    "name": "Roberto Baggio",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50332762.22c8f95e58059302b73bea99f54dcf7a4ec5f6f614d8123ef5ede4689f049b5e.webp",
+    "club goals": 291,
+    "international goals": 27
+  },
+  {
+    "name": "Robin van Persie",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50593760.ad52ac1e63fbf7f439367cba551e8706f4d928f8edd71d8e90eade2c6b7fa3be.webp",
+    "club goals": 272,
+    "international goals": 50
+  },
+  {
+    "name": "Marcus Rashford",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-84117757.45667025a4d163aff4e3598d0848604d896d693c85544f6bab78730f9eb7bdf7.webp",
+    "club goals": 140,
+    "international goals": 17
+  },
+  {
+    "name": "Riyad Mahrez",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50536133.28fbb90a2cf50ee3b6a219550ff1aeeea69e1d42e1caa61eb4f57294b5f719a4.webp",
+    "club goals": 186,
+    "international goals": 32
+  },
+  {
+    "name": "Carvajal",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50536611.760dd47dc9dd1ff23b9b9334bafbf1f22779ffa7348e808577c7a89d191f4c95.webp",
+    "club goals": 18,
+    "international goals": 1
+  },
+  {
+    "name": "Sadio Mané",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50540370.22c841c855cb072f5b93d784bc1bad58fe9616724a24773717d0338e47d8f9d5.webp",
+    "club goals": 234,
+    "international goals": 45
+  },
+  {
+    "name": "Antony",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/100918771.webp",
+    "club goals": 47,
+    "international goals": 2
+  },
+  {
+    "name": "Richarlison",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50563591.4b358bcec63e66ac134e9ac4c1b0b65f766157c7235de5db4f31bf17c0ed81ab.webp",
+    "club goals": 104,
+    "international goals": 20
+  },
+  {
+    "name": "Gianfranco Zola",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67110065.65df2181059f4ca41d132aefed42e96e81b3151bc6f8efd60d690a94b8d6be52.webp",
+    "club goals": 238,
+    "international goals": 10
+  },
+  {
+    "name": "Rafael Leão",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67350585.d0254890360c633fbd346207b299048141ec494d5f4939de25d400d499e40bf6.webp",
+    "club goals": 84,
+    "international goals": 5
+  },
+  {
+    "name": "Rodrygo",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50575460.fb3534ce40bfbe52866e96bc2ee393f1ee2a7e080ee0b0be421684b910ecf6be.webp",
+    "club goals": 87,
+    "international goals": 7
+  },
+  {
+    "name": "Karim Adeyemi",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-117692364.877f00fe9645f8aa26145cf02b9e946fe85e8a33b418a35d48b585ba1405e21b.webp",
+    "club goals": 71,
+    "international goals": 1
+  },
+  {
+    "name": "Gabriel Jesus",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84116746.add22e03535bea5e78403a790bb8ba1baaf0b01a8cbbdf66befd67a0ae0db663.webp",
+    "club goals": 149,
+    "international goals": 19
+  },
+  {
+    "name": "Franck Ribéry",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50488264.a1175d805cb1765a9864440337cf65f5bdf9859667d66892aa19103f9c36b46a.webp",
+    "club goals": 161,
+    "international goals": 16
+  },
+  {
+    "name": "Gerd Müller",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67298912.ae482ef9d7eed5ba507aeca573d719a4020e99bd3e87e8a4cc092098a80b58c4.webp",
+    "club goals": 656,
+    "international goals": 68
+  },
+  {
+    "name": "Romelu Lukaku",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67301369.cf22ff897dbeee68c333a928fdb39e91920af44e04a45c359fdbe11f04323bcb.webp",
+    "club goals": 311,
+    "international goals": 88
+  },
+  {
+    "name": "Dennis Bergkamp",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50570036.9a25cc55c43083651719596a1c1673a51dca066d7c1c19037b8b4bf69702209c.webp",
+    "club goals": 264,
+    "international goals": 37
+  },
+  {
+    "name": "Fabio Cannavaro",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50332831.23a75c5dd0aa8cef39d3c83edc75442bff9ce8b56e49efde297f032092d576c3.webp",
+    "club goals": 19,
+    "international goals": 2
+  },
+  {
+    "name": "Bukayo Saka",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-67355533.c7278b900fd294f97893bdaa0be81ee000544136535662b1122dc62fc4191875.webp",
+    "club goals": 69,
+    "international goals": 12
+  },
+  {
+    "name": "Alexander Isak",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-67342595.6a2d6a1d66dbed69359e43a772bf784d77a6d76e9c01a1154293b8982af3ab7a.webp",
+    "club goals": 136,
+    "international goals": 16
+  },
+  {
+    "name": "Phil Foden",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-117678204.33e20afa4c70ad6a9df439bdd412a4be9d8d61bf5c472bc8e0a85054708348b3.webp",
+    "club goals": 97,
+    "international goals": 4
+  },
+  {
+    "name": "Martin Ødegaard",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-117663177.e7d3cdde440e1d0d26e8a06da6378bcbecaecb694c424c0e8c54bac2ee9e5013.webp",
+    "club goals": 76,
+    "international goals": 3
+  },
+  {
+    "name": "Patrick Vieira",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67347291.1c626717a4a313f935fb3bf68e5b74a3956acc005b7068c617edeb5b0f0c7a8f.webp",
+    "club goals": 58,
+    "international goals": 6
+  },
+  {
+    "name": "Ian Wright",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84134226.708238503184321ea4e8e37d0bc3f71e10b6b1719ffb7c0be76f4170359d8154.webp",
+    "club goals": 324,
+    "international goals": 9
+  },
+  {
+    "name": "David Silva",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/50500190.webp",
+    "club goals": 125,
+    "international goals": 35
+  },
+  {
+    "name": "Nani",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50470716.84f53946df084d64895fcf286e8f981afcb1982ff38102bd6b7e8c9746c425c6.webp",
+    "club goals": 128,
+    "international goals": 24
+  },
+  {
+    "name": "Bruno Fernandes",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67321062.87322def6db5967e6ae48f959cae6548e3bb57c9504e5469488b40bf4cee0a5a.webp",
+    "club goals": 179,
+    "international goals": 25
+  },
+  {
+    "name": "Roy Keane",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-83886320.c07811976dba1841f47d8b9a96f21453c3779eacbd60dfd1a2e97888ebf323d0.webp",
+    "club goals": 87,
+    "international goals": 9
+  },
+  {
+    "name": "Ruud van Nistelrooy",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67119128.d0d68c0426a2f58e6144a0386ce13dead70a2c3331b6fd95d70505f423a7a10d.webp",
+    "club goals": 349,
+    "international goals": 35
+  },
+  {
+    "name": "Dirk Kuyt",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-67124587.0b9aaf34dacca22b76d0512da75ba5e24a65506e9df043a4b2bd135935a955cf.webp",
+    "club goals": 298,
+    "international goals": 24
+  },
+  {
+    "name": "William Saliba",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-50575363.bcf15518e416601f66a081e0ee5949518995531a5c9e2b1c8f76510d8bc32ce1.webp",
+    "club goals": 8,
+    "international goals": 0
+  },
+  {
+    "name": "Cole Palmer",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84143614.962c9ab6e7cfe97731f19445b64fa3a1e020167f125a7519540fe7d25d84d166.webp",
+    "club goals": 46,
+    "international goals": 2
+  },
+  {
+    "name": "Timo Werner",
+    "img": "https://game-assets.fut.gg/2024/futgg-player-item-card/24-84098268.24a904c54cbbb58c18ceb92808e70fc13deeaef37cd5fda5beffec4bf5d11555.webp",
+    "club goals": 154,
+    "international goals": 24
+  },
+  {
+    "name": "Michael Owen",
+    "img": "https://game-assets.fut.gg/2023/cards/futgg-cards/50337067.webp",
+    "club goals": 222,
+    "international goals": 40
+  },
+  {
+    "name": "Harry Maguire",
+    "img": "https://game-assets.fut.gg/2025/futgg-player-item-card/25-50534911.ff13abcee2602fd6a6f4445f2742b74982b1128671f53b3e66a783ba1a02e95d.webp",
+    "club goals": 36,
+    "international goals": 7
+  }
+];
+    let avail = [...players], picks=0;
+    let lastPlayer = null; // Track the last player for proper placement
+    let autoFillTimeoutId = null; // Track timeout for auto-filling
+
+    // DOM refs
+    const rows           = document.querySelectorAll('.slot-row');
+    const imgEl          = document.getElementById('player-img');
+    const nameEl         = document.getElementById('player-name');
+    const currentCareerEl= document.getElementById('current-career');
+    const resultEl       = document.getElementById('result');
+
+    function nextPlayer() {
+      if (picks >= 7) return finish();
+      
+      // Always randomly select a player, even for the last pick
+      const idx = Math.floor(Math.random() * avail.length);
+      const p = avail.splice(idx, 1)[0];
+      
+      // Store the current player for the last pick
+      lastPlayer = p;
+      
+      // display current
+      imgEl.src = p.img;
+      imgEl.alt = p.name;
+      nameEl.textContent = p.name;
+      currentCareerEl.textContent = p['club goals'] + p['international goals'];
+      
+      // For the last pick (when picks = 6), auto-fill the remaining slot
+      if (picks === 6) {
+        // Find the empty slot (should be only one)
+        const emptySlot = [...rows].find(r => !r.classList.contains('filled'));
+        if (emptySlot) {
+          // Automatically fill the last empty slot after a short delay
+          autoFillTimeoutId = setTimeout(() => {
+            fill(emptySlot, p);
+          }, 800);
+        }
+      }
+      
+      // attach clicks for manual selection
+      rows.forEach(r => {
+        if (!r.classList.contains('filled')) {
+          // Always use the lastPlayer for slot selection
+          r.onclick = () => {
+            // Cancel auto-fill timer if it exists
+            if (autoFillTimeoutId) {
+              clearTimeout(autoFillTimeoutId);
+              autoFillTimeoutId = null;
+            }
+            fill(r, lastPlayer);
+          };
+        }
+      });
+    }
+
+    function fill(row, p) {
+      if (row.classList.contains('filled')) return;
+      const type = row.dataset.type;
+      let val;
+      if(type === 'career') {
+        if ([...rows].filter(r => r.dataset.type === 'career' && r.classList.contains('filled')).length >= 2) return;
+        val = p['club goals'] + p['international goals'];
+      }
+      else if(type === 'double') {
+        if ([...rows].filter(r => r.dataset.type === 'double' && r.classList.contains('filled')).length >= 2) return;
+        val = (p['club goals'] + p['international goals']) * 2;
+      }
+      
+      else if(type === 'triple') {
+        if ([...rows].filter(r => r.dataset.type === 'triple' && r.classList.contains('filled')).length >= 2) return;
+        val = (p['club goals'] + p['international goals']) * 3;
+      }
+      
+      else if(type === 'quad') {
+        if ([...rows].filter(r => r.dataset.type === 'quad' && r.classList.contains('filled')).length >= 1) return;
+        val = (p['club goals'] + p['international goals']) * 4;
+      }
+      
+      row.querySelector('.player-name').textContent = p.name;
+      row.querySelector('.player-value').textContent = val;
+      row.classList.add('filled');
+      picks++;
+      nextPlayer();
+    }
+
+    function finish() {
+      // Keep the last player's image and stats visible
+      // Don't clear: imgEl.src, nameEl.textContent, currentClubEl, currentCareerEl
+      
+      let total = [...rows]
+        .filter(r => r.classList.contains('filled'))
+        .reduce((sum, r) => sum + parseInt(r.querySelector('.player-value').textContent, 10), 0);
+      
+      // Use the modal instead of the text result
+      showGameOverModal(total);
+    }
+
+    function resetGame() {
+      // Reset game state
+      avail = [...players];
+      picks = 0;
+      lastPlayer = null;
+      resultEl.textContent = '';
+      
+      // Clear all slot rows
+      rows.forEach(r => {
+        r.classList.remove('filled');
+        r.querySelector('.player-name').textContent = '—';
+        r.querySelector('.player-value').textContent = '—';
+        r.onclick = null; // Clear any event handlers
+      });
+    
+      // Cancel any pending auto-fill
+      if (autoFillTimeoutId) {
+        clearTimeout(autoFillTimeoutId);
+        autoFillTimeoutId = null;
+      }
+      
+      // Reset player display
+      imgEl.src = '';
+      nameEl.textContent = '';
+      currentCareerEl.textContent = '—';
+      
+      // Start fresh
+      nextPlayer();
+    }
+
+    // Grab the Play Again button
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    
+    playAgainBtn.addEventListener('click', resetGame);
+
+    // start the game
+    nextPlayer();
+  </script>
+</body>
+</html>

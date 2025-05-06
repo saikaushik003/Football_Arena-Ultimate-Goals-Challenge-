@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1000 Goals Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=queue_musicgraphic_eq"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'ZCOOL KuaiLe', cursive;
+      background-color: #F1F5F9;
+      line-height: 1.6;
+    }
+
+    /* “Wave” animation on the Google equalizer icon */
+    @keyframes wave {
+      0%   { transform: scaleY(1); }
+      20%  { transform: scaleY(1.2); }
+      40%  { transform: scaleY(0.8); }
+      60%  { transform: scaleY(1.4); }
+      80%  { transform: scaleY(0.9); }
+      100% { transform: scaleY(1); }
+    }
+
+    .wave {
+      display: inline-block;
+      transform-origin: center bottom;
+      animation: wave 0.8s ease-in-out infinite;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-slate-300 min-h-screen font-extrabold">
+    <header>
+      <div class="p-2 flex items-center justify-center text-xl text-blue-950">
+        1000 GOALS CHALLENGE
+      </div>
+      <button
+        id="settingsBtn"
+        class="absolute top-2 right-4 border-2 border-black p-1 rounded-lg flex items-center justify-center"
+      >
+        <span class="material-symbols-outlined">queue_music</span>
+      </button>
+      <!-- Dropdown Menu -->
+      <div id="dropdown" class="absolute right-0 mt-2 w-48 bg-slate-200 shadow-lg rounded-lg hidden">
+        <ul class="py-2">
+          <li data-src="music/John Newman - Love Me Again.mp3" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            Love Me Again
+          </li>
+          <li data-src="music/Heat Waves - Glass Animals.mp3" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            Heat Waves
+          </li>
+          <li data-src="music/The Nights.mp3" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            The Nights
+          </li>
+          <li data-src="music/Way Down We Go.mp3" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+            Way Down We Go
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="p-2 space-y-2">
+      <div class="flex items-center justify-center">
+        <img
+          class="w-[120px]"
+          src="https://game-assets.fut.gg/2024/futgg-player-item-card/24-167963031.aad31a870c81fdfea65d30fce5cb4e4f477bd95e9afed894c629187352b8404d.webp"
+          alt="Player Card"
+        />
+      </div>
+      <div class="flex items-center justify-center gap-10">
+        <p class="text-blue-950">
+          <span class="text-rose-600">CLUB GOALS:</span> 100
+        </p>
+        <p class="text-blue-950">
+          <span class="text-yellow-600">CAREER GOALS:</span> 400
+        </p>
+      </div>
+    </div>
+
+    <div class="px-12 py-2 space-y-2">
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <div>
+          <p class="border-r-4 border-black w-20 flex items-center justify-center text-rose-600 text-sm">C L</p>
+          <p class="border-r-4 border-black w-20 flex items-center justify-center text-rose-600 text-sm">U B</p>
+        </div>
+        <p class="flex items-center justify-center">Zlatan Ibrahimović</p>
+        <p class="w-14 flex items-center justify-center">16000</p>
+      </div>
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <p class="border-r-4 border-black w-20 text-sm flex items-center justify-center text-yellow-600">CAREER</p>
+        <p class="flex items-center justify-center">Zlatan Ibrahimović</p>
+        <p class="w-14 flex items-center justify-center">16000</p>
+      </div>
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <p class="border-r-4 border-black w-20 flex items-center justify-center text-orange-600">x 2</p>
+        <p class="flex items-center justify-center">Zlatan Ibrahimović</p>
+        <p class="w-14 flex items-center justify-center">16000</p>
+      </div>
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <p class="border-r-4 border-black w-20 flex items-center justify-center text-emerald-700">x 3</p>
+        <p class="flex items-center justify-center">Zlatan Ibrahimović</p>
+        <p class="w-14 flex items-center justify-center">16000</p>
+      </div>
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <p class="border-r-4 border-black w-20 flex items-center justify-center text-violet-600">x 4</p>
+        <p class="flex items-center">Neymar Jr</p>
+        <p class="w-14 flex items-center justify-center">16000</p>
+      </div>
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <p class="border-r-4 border-black w-20 flex items-center justify-center text-sky-600">x 5</p>
+        <p class="flex items-center">Cristiano Ronaldo</p>
+        <p class="w-14 flex items-center justify-center">20000</p>
+      </div>
+      <div class="border-2 border-black p-2 flex items-center justify-between">
+        <p class="border-r-4 border-black w-20 flex items-center justify-center text-sky-600">x 5</p>
+        <p class="flex items-center">Cristiano Ronaldo</p>
+        <p class="w-14 flex items-center justify-center">20000</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const settingsBtn  = document.getElementById('settingsBtn');
+    const dropdown     = document.getElementById('dropdown');
+    const trackItems   = Array.from(document.querySelectorAll('#dropdown li'));
+    let currentAudio   = null;
+    let currentIndex   = -1;
+  
+    settingsBtn.addEventListener('click', () => {
+      dropdown.classList.toggle('hidden');
+    });
+  
+    // Centralized play logic
+    function playTrackAt(index) {
+      const li  = trackItems[index];
+      const src = li.dataset.src;
+  
+      // Stop previous track
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.remove(); // clean up event listeners
+      }
+  
+      // Clear any existing wave icons
+      document.querySelectorAll('#dropdown li .wave').forEach(ic => ic.remove());
+  
+      // Create & play new audio
+      currentAudio = new Audio(src);
+      currentAudio.volume = 0.2;
+      currentIndex    = index;
+  
+      // When it ends, advance to the next one
+      currentAudio.addEventListener('ended', () => {
+        const nextIndex = (currentIndex + 1) % trackItems.length;
+        playTrackAt(nextIndex);
+      });
+  
+      currentAudio.play();
+  
+      // Show wave icon on the active li
+      const icon = document.createElement('span');
+      icon.className   = 'material-symbols-outlined wave';
+      icon.textContent = 'equalizer';
+      li.appendChild(icon);
+    }
+  
+    // Wire up clicking in the menu
+    trackItems.forEach((item, idx) => {
+      item.addEventListener('click', e => {
+        // If same track is already playing, do nothing
+        if (currentAudio && currentAudio.src.includes(item.dataset.src)) return;
+        playTrackAt(idx);
+      });
+    });
+  
+    // Close dropdown when clicking outside
+    document.addEventListener('click', e => {
+      if (!settingsBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add('hidden');
+      }
+    });
+</script>
+
+</body>
+</html>
